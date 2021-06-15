@@ -67,7 +67,7 @@ input[type="text"] {
     padding: 1em;
     padding-left: 0;
     border-image: url('images/input.png') 50 round;
-    border-bottom: 8px solid;
+    border-bottom: 6px solid;
 }
 
 input[type="text"]::placeholder {
@@ -112,7 +112,7 @@ input[type="text"]:focus {
     color: white;
     font-size: 1vw;
     border-image: url('images/input.png') 50 round;
-    border-bottom: 8px solid;
+    border-bottom: 6px solid;
 }
 
 #cluster option {

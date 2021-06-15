@@ -20,10 +20,10 @@
         <form action="/" method="POST" id="upload-form">
             <div class="flex">
             <div class="left">
-                <input type="text" name="name" id="name" placeholder="Naam">
+                <input type="text" name="name" id="name" placeholder="Naam" required>
 
                 <label for="cluster" class="cluster-label">Keuzecluster</label>
-                <select name="cluster" id="cluster">
+                <select name="cluster" id="cluster" required>
                     <option value="web">Web</option>
                     <option value="reality">Alternate Reality</option>
                     <option value="mobile">Mobile Appliance</option>
@@ -33,11 +33,11 @@
 
                 <p class="image-p">Thumbnail / foto</p>
                 <label for="image" class="image-label" id="image-label"></label>
-                <input type="file" name="image" id="image" class="image-upload">
+                <input type="file" name="image" id="image" class="image-upload" required>
             </div>
 
             <div class="right">
-                <input type="text" name="link" id="link" placeholder="Link naar project">
+                <input type="text" name="link" id="link" placeholder="Link naar video (youtube)" required>
                 <textarea name="description" id="description" cols="30" rows="10">Beschrijving</textarea>
             </div>
             </div>
