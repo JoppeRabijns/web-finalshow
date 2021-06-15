@@ -19,7 +19,6 @@
 }
 
 .innerbody {
-    overflow-x: hidden;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -85,7 +84,7 @@ input {
 
 #notify {
     margin: 1vh 0;
-    padding: 10px;
+    padding: 10px 25px;
     text-align: center;
     font-size: 16px;
 }
@@ -102,7 +101,7 @@ input {
 }
 
 #submit {
-    padding: 1.5% 5%;
+    padding: 10px 25px;
     background-color: #4242429f;
     color: #ffffff;
     margin-bottom: 1%;
