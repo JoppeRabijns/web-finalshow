@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="./images/fav.png" />
+    <title>EHackB - Editie 7</title>
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="https://use.typekit.net/zuw0gem.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="bg_img"></div>
+    <div class="innerbody">
+        <div id="tsparticles"></div>
+        <div id="logoDiv">
+            <img data-tilt id="logo" src="./images/logo.png" alt="EhackB v7 logo">
+        </div>
+        <div id="contentDiv">
+            <h2>25 juni - 18:00 uur</h2>
+            <form id="notify-form" method="POST" action="">
+                <input type="email" id="notify" name="notify" placeholder="Notify me!" required>
+                <input type="submit" id="submit" name="submit">
+            </form>
+            <div id="socials">
+                <!-- <a href="https://www.twitch.tv/ehackb" target="_blank"><i class="fab fa-twitch"></i></a> -->
+                <a href="https://www.facebook.com/EhackB/" target="_blank"><i class="fab fa-facebook"></i></a>
+                <!-- <a href="https://twitter.com/ehackb" target="_blank"><i class="fab fa-twitter"></i></a> -->
+            </div>
+        </div>
+        <footer>
+            <p class="copyright">© Erasmushogeschool Brussel - <a href="https://www.ehb.be"
+                    target="_blank">www.ehb.be</a>
+            </p>
+        </footer>
+    </div>
+</body>
+<!-- ©https://github.com/matteobruni/tsparticles/ MIT-license-->
+
+<script type="text/javascript" src="./script.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/tsparticles@1.25.0'></script>
+<script src='https://cdn.jsdelivr.net/npm/tsparticles-shape-confetti@1.10.0'></script>
+
+
+</html>
