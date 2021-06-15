@@ -7,6 +7,7 @@
     <title>Uploadzone</title>
     <link rel="stylesheet" href="index.css">
     <script src="https://kit.fontawesome.com/3f2d033088.js" crossorigin="anonymous"></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
     <div class="bg_img"></div>
@@ -48,14 +49,5 @@
             </div>
         </form>
     </main>
-
-    <script>
-        const imageLabel = document.getElementById('image-label');
-        document.getElementById('image').addEventListener('change', () => {
-            console.log("%cIMAGE UPLOADED", 'color: red; font-weight: bold');
-            imageLabel.style.backgroundColor = "white";
-            imageLabel.style.backgroundImage = "url('images/upload_black.png')";
-        })
-    </script>
 </body>
 </html>
