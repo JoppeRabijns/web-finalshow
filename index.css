@@ -4,16 +4,24 @@
     font-family: "Manrope", sans-serif;
 }
 
+body {
+    overflow: hidden;
+}
+
 .bg_img {
     background-image: url("./images/bg.png");
     background-position: center;
     filter: blur(6px);
     -webkit-filter: blur(6px);
     background-size: cover;
-    height: 100vh;
-    width: 100vw;
     position: absolute;
     z-index: -1;
+    height: 102.5vh;
+    width: 102.5vw;
+    position: absolute;
+    z-index: -1;
+    left: -0.75vw;
+    top: -0.75vh;
 }
 
 .innerbody {
@@ -156,6 +164,10 @@ input {
 
 .fab {
     margin: 0.5em;
+}
+
+.ehbimg {
+    width: 120px;
 }
 
 /*-------------------------------------
