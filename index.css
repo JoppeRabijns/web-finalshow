@@ -1,13 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300&display=swap');
-
 * {
     padding: 0;
     margin: 0;
+    font-family: "Manrope", sans-serif;
 }
 
 .bg_img {
-    font-family: "Manrope", sans-serif;
-    background-image: url("./images/bg.jpg");
+    background-image: url("./images/bg.png");
     background-position: center;
     filter: blur(6px);
     -webkit-filter: blur(6px);
@@ -52,11 +50,13 @@
 }
 
 h2 {
-    font-size: 5vw;
+    font-size: 2em;
     font-weight: 500;
     width: 100%;
     margin: auto;
     text-align: center;
+    color: white;
+    font-weight: 300;
 }
 
 a {
@@ -75,8 +75,9 @@ input {
 }
 
 #notify-form {
-    margin: auto;
+    margin: 45px auto;
     width: 80%;
+    max-width: 550px;
     max-width: 600px;
     display: flex;
     flex-direction: column;
@@ -86,7 +87,13 @@ input {
     margin: 1vh 0;
     padding: 10px 25px;
     text-align: center;
-    font-size: 16px;
+    font-size: 1.2em;
+    border: none;
+    border-image: url("./images/line.png") 50 round;
+    border-bottom: 5px solid black;
+    border-width: 100%;
+    background-color: transparent;
+    color: white;
 }
 
 #notify:focus {
@@ -98,13 +105,17 @@ input {
     text-align: center;
     font-size: 20px;
     font-weight: 400;
+    color: white;
 }
 
 #submit {
     padding: 10px 25px;
-    background-color: #4242429f;
-    color: #ffffff;
-    margin-bottom: 1%;
+    margin-top: 25px;
+    font-size: 1.2em;
+    font-weight: 600;
+    background-color: transparent;
+    color: white;
+    border: none;
     text-align: center;
 }
 
@@ -114,12 +125,7 @@ input {
 
 #submit:active {
     outline: none;
-    background-color: #3496c7;
-}
-
-/* Red placeholder class */
-.errorplaceholder::placeholder {
-    color: red;
+    background-color: #60c1ea21;
 }
 
 #notify::-webkit-input-placeholder,
@@ -129,6 +135,11 @@ input {
     text-align: center;
     font-size: 20px;
     font-weight: 700;
+}
+
+.arrow-right {
+    display: inline-block;
+    padding-left: 15px;
 }
 
 
@@ -161,6 +172,12 @@ footer {
     margin-bottom: 10px;
     font-family: "futura-pt", sans-serif;
     font-weight: 300;
+    color: white;
+}
+
+.copyright a {
+    color: white;
+    border-bottom: 1px solid white;
 }
 
 
