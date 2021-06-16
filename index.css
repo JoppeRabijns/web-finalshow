@@ -150,6 +150,9 @@ input {
     padding-left: 15px;
 }
 
+.error::placeholder {
+    color: red;
+}
 
 /*-------------------------------------
 --------------- SOCIALS ---------------

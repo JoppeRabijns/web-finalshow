@@ -17,13 +17,17 @@
 <body>
     <div class="bg_img"></div>
     <div class="innerbody">
-        <div id="tsparticles"></div>
         <div id="logoDiv">
-            <img data-tilt id="logo" src="./images/logo.png" alt="EhackB v7 logo">
+            <img id="logo" src="./images/logo.png" alt="EhackB v7 logo">
         </div>
         <div id="contentDiv">
             <h2>25 juni - 18:00 uur</h2>
             <h2 id="countdown">countdown</h2>
+            <div style="display: none" id="response-el">
+                <br>
+                <br>
+                <h2 style="font-weight: 600;"></h2>
+            </div>
             <form id="notify-form" method="POST" action="">
                 <input type="email" id="notify" name="notify" placeholder="E-mail" required>
                 <button type="submit" id=submit name=submit>Notify me! <i class="fas fa-chevron-right arrow-right"
@@ -40,11 +44,5 @@
         </footer>
     </div>
 </body>
-<!-- ©https://github.com/matteobruni/tsparticles/ MIT-license-->
-
-<script type="text/javascript" src="./script.js"></script>
-<script src='https://cdn.jsdelivr.net/npm/tsparticles@1.25.0'></script>
-<script src='https://cdn.jsdelivr.net/npm/tsparticles-shape-confetti@1.10.0'></script>
-
 
 </html>
