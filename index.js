@@ -17,7 +17,7 @@ const checkSubmit = (email) => {
             }).then(
                 result => {
                     notifyForm.style.display = 'none';
-                    contentHead.innerHTML = "TOT SNEL!";
+                    responseEl.style.display = "block";
                 },
                 error => {
                     document.getElementById('notify').setAttribute('placeholder', 'Error, please try again!');
