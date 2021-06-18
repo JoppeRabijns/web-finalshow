@@ -6,7 +6,7 @@ const checkSubmit = (email) => {
         //check if there is a value. Only then do a fetch
         if (document.getElementById('notify').value) {
             console.log(document.getElementById('notify').value);
-            fetch('https://demo-api-web2.herokuapp.com/signup', {
+            fetch('http://193.191.183.48:3000/add-email', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -23,7 +23,6 @@ const checkSubmit = (email) => {
                     document.getElementById('notify').setAttribute('placeholder', 'Error, please try again!');
                     document.getElementById('notify').classList.add('error');
                     document.getElementById('notify').value = '';
-
                 }
             );
         }
