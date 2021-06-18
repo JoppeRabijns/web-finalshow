@@ -9,7 +9,7 @@ body {
 }
 
 .bg_img {
-    background-image: url("./images/bg2.png");
+    background-image: url("./images/bg.png");
     background-position: center;
     filter: blur(7px);
     -webkit-filter: blur(7px);
