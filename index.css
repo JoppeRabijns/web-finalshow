@@ -6,10 +6,11 @@
 
 body {
     overflow: hidden;
+    position: relative;
 }
 
 .bg_img {
-    background-image: url("./images/bg.png");
+    background-image: url("./images/bg2.png");
     background-position: center;
     filter: blur(7px);
     -webkit-filter: blur(7px);
@@ -36,16 +37,16 @@ body {
 -------------------------------------*/
 
 #logoDiv {
+    display: flex;
+    justify-content: center;
     overflow: hidden;
     padding: 5vh;
     box-sizing: border-box;
-
 }
 
 #logo {
-    width: 70vw;
-    max-width: 350px;
-    width: 100%;
+    width: 20vw;
+    max-width: 400px;
     margin: auto;
 }
 
@@ -58,7 +59,7 @@ body {
 }
 
 h2 {
-    font-size: 2em;
+    font-size: 1.75vw;
     font-weight: 500;
     width: 100%;
     margin: auto;
@@ -68,8 +69,13 @@ h2 {
 }
 
 a {
-    color: black;
+    color: white;
     text-decoration: none;
+}
+
+.linktree-a {
+    font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 /*-------------------------------------
@@ -84,6 +90,7 @@ input {
 
 #notify-form {
     margin: 45px auto;
+    margin-top: 20px;
     width: 80%;
     max-width: 550px;
     max-width: 600px;
@@ -170,7 +177,27 @@ input {
 }
 
 .ehbimg {
-    width: 120px;
+    position: absolute;
+    left: 35%;
+    bottom: 7.5%;
+    width: 6.6vw;
+    max-width: 200px;
+}
+
+.linktree {
+    position: absolute;
+    right: 35%;
+    bottom: 9%;
+    background-color: transparent;
+    border: 2px solid white;
+    padding: 0.5em 1em;
+    font-size: 1.5vw;
+    transition: .2s ease;
+}
+
+.linktree:hover {
+    cursor: pointer;
+    box-shadow: 2px 2px 5px grey;
 }
 
 /*-------------------------------------
@@ -202,4 +229,46 @@ footer {
     height: 100vh;
     z-index: 100;
     pointer-events: none;
+}
+
+/*-------------------------------------
+--------------- MEDIA QUERY ----------------
+-------------------------------------*/
+
+@media only screen and (max-width: 1025px) {
+    #logo {
+        width: 40vw;
+    }
+
+    h2 {
+        font-size: 5vw;
+    }
+
+    #submit {
+        font-size: 4vw;
+    }
+
+    #notify::placeholder {
+        font-size: 4vw;
+    }
+
+    #notify::-webkit-input-placeholder,
+    #notify:-ms-input-placeholder {
+    /* Edge, IE */
+        font-size: 4vw;
+    }
+
+    .linktree {
+        left: 50%;
+        bottom: 25%;
+        transform: translateX(-50%);
+        font-size: 4.5vw;
+    }
+
+    .ehbimg {
+        left: 50%;
+        bottom: 9%;
+        transform: translateX(-50%);
+        width: 22.5vw;
+    }
 }
