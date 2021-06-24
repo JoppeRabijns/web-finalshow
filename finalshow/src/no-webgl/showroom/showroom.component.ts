@@ -10,7 +10,14 @@ export class ShowroomComponent implements OnInit {
 
   constructor() { }
 
+  goTo2D(){
+    document.getElementById('linkTo2D')?.addEventListener('click', function(){
+      window.location.href = '/hub';
+    })
+  }
+
   ngOnInit() {
+    this.goTo2D();
     var menubuttons = document.querySelectorAll("button");
     var menucluster = "web";
     menubuttons.forEach(button => {
@@ -89,10 +96,10 @@ export class ShowroomComponent implements OnInit {
             <img class="coverphoto" src="${project.images}">`;
             if(false){
                 htmlString += `
-                <img src="../../assets/images/flagwinner.svg" class="showroomflag-winner" alt="...">`
+                <img src="../../assets/images/flagwinnerNoWEBGL.svg" class="showroomflag-winner" alt="...">`
               }else if(true){
                 htmlString += `
-                <img src="../../assets/images/flagnominee.svg" class="showroomflag-nominee" alt="...">`
+                <img src="../../assets/images/flagnomineeNoWEBGL.svg" class="showroomflag-nominee" alt="...">`
               }; 
               htmlString += `   
             <h2>${project.name}</h2>
@@ -113,10 +120,10 @@ export class ShowroomComponent implements OnInit {
             <img class="coverphoto" src="${project.images}">`;
             if(false){
                 htmlString += `
-                <img src="../../assets/images/flagwinner.svg" class="showroomflag-winner" alt="...">`
+                <img src="../../assets/images/flagwinnerNoWEBGL.svg" class="showroomflag-winner" alt="...">`
               }else if(true){
                 htmlString += `
-                <img src="../../assets/images/flagnominee.svg" class="showroomflag-nominee" alt="...">`
+                <img src="../../assets/images/flagnomineeNoWEBGL.svg" class="showroomflag-nominee" alt="...">`
               }; 
               htmlString +=   `
             <h2>${project.name}</h2>
@@ -133,10 +140,10 @@ export class ShowroomComponent implements OnInit {
             <img class="coverphoto" src="${project.images}">`;
             if(true){
                 htmlString += `
-                <img src="../../assets/images/flagwinner.svg" class="showroomflag-winner" alt="...">`
+                <img src="../../assets/images/flagwinnerNoWEBGL.svg" class="showroomflag-winner" alt="...">`
               }else if(false){
                 htmlString += `
-                <img src="../../assets/images/flagnominee.svg" class="showroomflag-nominee" alt="...">`
+                <img src="../../assets/images/flagnomineeNoWEBGL.svg" class="showroomflag-nominee" alt="...">`
               }; 
               htmlString += `   
             <h2>${project.name}</h2>

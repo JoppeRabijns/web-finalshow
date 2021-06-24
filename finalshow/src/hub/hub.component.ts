@@ -112,11 +112,17 @@ render(){
     }
   }
 
+  goTo2D(){
+    document.getElementById('linkTo2D')?.addEventListener('click', function(){
+      window.location.href = '/no-webgl';
+    })
+  }
+
   ngOnInit() {
     this.orbitControls();
     this.loadTerrain();
     this.render();
-    this.livestream.youtubeStream('5qap5aO4i9A', -53, 4.5, -0.75, Math.PI/2,this.cssscene);
+    this.livestream.youtubeStream('xdzFzMn5OnE', -53, 4.5, -0.75, Math.PI/2,this.cssscene);
     this.manager.onLoad = () => {
       console.log('%cLoading complete!', 'font-weight: bold; color: red;');
       this.lights.addLights(this.scene);
@@ -129,6 +135,7 @@ render(){
         confirmButtonColor: '#CD9DC8',
         confirmButtonText: 'Ik ben er klaar voor!'
       })
+      this.goTo2D()
     };
   }
 }
