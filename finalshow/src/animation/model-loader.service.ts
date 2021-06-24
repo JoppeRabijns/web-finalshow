@@ -73,7 +73,7 @@ export class ModelLoaderService {
         positions.push(vector.z);
     }
     const typedArray = Float32Array.from(positions);
-    geometry.setAttribute('position', new BufferAttribute(typedArray, 3));
+    geometry.setAttribute(positions, new BufferAttribute(typedArray, 3));
 
     let stone = new TextureLoader().load(textureFile);
     stone.wrapS = RepeatWrapping;
