@@ -16,6 +16,11 @@ export class ShowroomComponent implements OnInit {
     })
   }
 
+  async fetchNominees(): Promise<Response> {
+    const req = await fetch('http://193.191.183.48:3000/admin/get-nominations');
+    return await req.json();
+  }
+
   ngOnInit() {
     this.goTo2D();
     var menubuttons = document.querySelectorAll("button");
@@ -51,109 +56,108 @@ export class ShowroomComponent implements OnInit {
         })
     });
 
-
-
     async function getapi(url) {
         const response = await fetch(url);
-    
-        var data = await response.json();
-
-        show(data);
-
+        const data = await response.json();
+        displayData(data);
     }
 
     getapi(api_url);
 
     //Na API Call alle projecten inladen, rangschikken per cluster en deze printen adhv keuze gebruiker
 
-    function show(data) {
-        var started = false;
-        var projecten = data.filter(p => p.cluster == cluster);
-        Array.prototype.next = function() {
-
-            return this[++this.current];
-
-        };
-        Array.prototype.prev = function() {
-            return this[--this.current];
-        };
-        Array.prototype.current = 0;
-        document.querySelector(".hoeveelheid").innerHTML = `${projecten.current+1}/${projecten.length}`;
-        var project = projecten[0];
-        var nextProject = document.querySelector(".right");
-        var previousProject = document.querySelector(".left");
-        nextProject.addEventListener("click", function(){
-        
-            if (projecten.length-1 == projecten.current){
-                projecten.current = -1;
-            }
-            project = projecten.next();
-
-
-            document.querySelector(".hoeveelheid").innerHTML = `${projecten.current+1}/${projecten.length}`;
-            console.log("text");
-            let htmlString =`
-            <img class="coverphoto" src="${project.images}">`;
-            if(false){
-                htmlString += `
-                <img src="../../assets/images/flagwinnerNoWEBGL.svg" class="showroomflag-winner" alt="...">`
-              }else if(true){
-                htmlString += `
-                <img src="../../assets/images/flagnomineeNoWEBGL.svg" class="showroomflag-nominee" alt="...">`
-              }; 
-              htmlString += `   
-            <h2>${project.name}</h2>
-            <a href="mailto:${project.email}"><h3>${project.username}</h3></a>
-            <h4>Beschrijving</h4>
-            <p>${project.description}<br><br><a id="projectvideo" target="_blank" href="${project.url}">Bekijk de projectvideo</a></p>
-            `;
-            document.querySelector(".projecten").innerHTML = htmlString;
-        });
-        previousProject.addEventListener("click", function(){
-            if (projecten.current == 0){
-                projecten.current = projecten.length;
-            }
-            project = projecten.prev();
-            document.querySelector(".hoeveelheid").innerHTML = `${projecten.current+1}/${projecten.length}`;
-            console.log("text");
-            let htmlString =`
-            <img class="coverphoto" src="${project.images}">`;
-            if(false){
-                htmlString += `
-                <img src="../../assets/images/flagwinnerNoWEBGL.svg" class="showroomflag-winner" alt="...">`
-              }else if(true){
-                htmlString += `
-                <img src="../../assets/images/flagnomineeNoWEBGL.svg" class="showroomflag-nominee" alt="...">`
-              }; 
-              htmlString +=   `
-            <h2>${project.name}</h2>
-            <a href="mailto:${project.email}"><h3>${project.username}</h3></a>
-            <h4>Beschrijving</h4>
-            <p>${project.description}<br><br><a id="projectvideo" target="_blank" href="${project.url}">Bekijk de projectvideo</a></p>
-            `;
-            document.querySelector(".projecten").innerHTML = htmlString;
-        });
-      
-      
-        if(!started) {
-            let htmlString =`
-            <img class="coverphoto" src="${project.images}">`;
-            if(true){
-                htmlString += `
-                <img src="../../assets/images/flagwinnerNoWEBGL.svg" class="showroomflag-winner" alt="...">`
-              }else if(false){
-                htmlString += `
-                <img src="../../assets/images/flagnomineeNoWEBGL.svg" class="showroomflag-nominee" alt="...">`
-              }; 
-              htmlString += `   
-            <h2>${project.name}</h2>
-            <a href="mailto:${project.email}"><h3>${project.username}</h3></a>
-            <h4>Beschrijving</h4>
-            <p>${project.description}<br><br><a id="projectvideo" target="_blank" href="${project.url}">Bekijk de projectvideo</a></p>
-            `;
-            document.querySelector(".projecten").innerHTML = htmlString;
-            started = true;
+    function displayData(data) {
+      let nomineesID: String[] = [];
+      fetch('http://193.191.183.48:3000/admin/get-nominations').then((clusters: any) => {
+        for (const [key, value] of Object.entries(clusters)) {
+          //@ts-ignore
+          for (let project of value) {
+            nomineesID.push(project.projectid);
+          }
+          //@ts-check
         }
+      })
+
+      let started = false;
+      const projecten = data.filter(p => p.cluster == cluster);
+      Array.prototype.next = function() {
+          return this[++this.current];
+      };
+      Array.prototype.prev = function() {
+          return this[--this.current];
+      };
+      Array.prototype.current = 0;
+      document.querySelector(".hoeveelheid").innerHTML = `${projecten.current+1}/${projecten.length}`;
+      var project = projecten[0];
+      var nextProject = document.querySelector(".right");
+      var previousProject = document.querySelector(".left");
+      nextProject.addEventListener("click", function(){
+        if (projecten.length-1 == projecten.current){
+            projecten.current = -1;
+        }
+        project = projecten.next();
+        document.querySelector(".hoeveelheid").innerHTML = `${projecten.current+1}/${projecten.length}`;
+        let htmlString =`<img class="coverphoto" src="${project.images}">`;
+        if(project.winner){
+          htmlString += `<img src="../../assets/images/flagwinnerNoWEBGL.svg" class="showroomflag-winner" alt="...">`
+        }else {
+          for (let id of nomineesID) {
+            if (id == project.projectid){
+            htmlString += `<img src="../../assets/images/flagnomineeNoWEBGL.svg" class="showroomflag-nominee" alt="...">`
+            }
+          };
+        }
+        htmlString += `<h2>${project.name}</h2>
+          <a href="mailto:${project.email}"><h3>${project.username}</h3></a>
+          <h4>Beschrijving</h4>
+          <p>${project.description}<br><br><a id="projectvideo" target="_blank" href="${project.url}">Bekijk de projectvideo</a></p>
+          `;
+        document.querySelector(".projecten").innerHTML = htmlString;
+      });
+      previousProject.addEventListener("click", function(){
+        if (projecten.current == 0){
+            projecten.current = projecten.length;
+        }
+        project = projecten.prev();
+        document.querySelector(".hoeveelheid").innerHTML = `${projecten.current+1}/${projecten.length}`;
+        let htmlString =`<img class="coverphoto" src="${project.images}">`;
+        if(project.winner){
+          htmlString += `<img src="../../assets/images/flagwinnerNoWEBGL.svg" class="showroomflag-winner" alt="...">`
+        }else {
+          for (let id of nomineesID) {
+            if (id == project.projectid){
+            htmlString += `<img src="../../assets/images/flagnomineeNoWEBGL.svg" class="showroomflag-nominee" alt="...">`
+            }
+          };
+        }
+        htmlString += `<h2>${project.name}</h2>
+          <a href="mailto:${project.email}"><h3>${project.username}</h3></a>
+          <h4>Beschrijving</h4>
+          <p>${project.description}<br><br><a id="projectvideo" target="_blank" href="${project.url}">Bekijk de projectvideo</a></p>
+          `;
+        document.querySelector(".projecten").innerHTML = htmlString;
+      });
+    
+    
+      if(!started) {
+        let htmlString =`<img class="coverphoto" src="${project.images}">`;
+        if(project.winner){
+          htmlString += `<img src="../../assets/images/flagwinnerNoWEBGL.svg" class="showroomflag-winner" alt="...">`
+        }else {
+          for (let id of nomineesID) {
+            if (id == project.projectid){
+            htmlString += `<img src="../../assets/images/flagnomineeNoWEBGL.svg" class="showroomflag-nominee" alt="...">`
+            }
+          };
+        }
+        htmlString += `<h2>${project.name}</h2>
+          <a href="mailto:${project.email}"><h3>${project.username}</h3></a>
+          <h4>Beschrijving</h4>
+          <p>${project.description}<br><br><a id="projectvideo" target="_blank" href="${project.url}">Bekijk de projectvideo</a></p>
+          `;
+        document.querySelector(".projecten").innerHTML = htmlString;
+        started = true;
+      }
     }
   }
 

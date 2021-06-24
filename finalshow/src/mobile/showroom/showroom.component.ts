@@ -34,7 +34,7 @@ export class ShowroomComponent implements OnInit {
   loadProjects(){
     this.fetchProjects().then((data: any)=>{
       this.fetchNominees().then((nominees) => {
-      this.sortProjects(data, nominees);
+        this.sortProjects(data, nominees);
       })
     });
   }
