@@ -178,7 +178,5 @@ export class ShowroomComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProjects();
-    this.addEventListeners();
   }
-
 }
