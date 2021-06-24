@@ -10,6 +10,7 @@ import { LivestreamComponent } from './livestream/livestream.component';
 import { PoiComponent } from './poi/poi.component';
 import { AnimationsComponent } from './animations/animations.component';
 import Swal from 'sweetalert2';
+import { DRACOLoader} from 'three/examples/jsm/loaders/DRACOLoader';
 
 @Component({
   selector: 'app-hub',
@@ -39,6 +40,7 @@ export class HubComponent implements OnInit {
   playlist=new Array('../assets/sounds/chill-sakura-hz-no-copyright-music.mp3','../assets/sounds/no-copyright-music-funky-groove-funk-music-by-mokka-groove-with-me.mp3','../assets/sounds/5-minutes-of-silence-with-a-black-background.mp3');
   animationLaunch=false;
   animations=new AnimationsComponent();
+  draco=new DRACOLoader();
 
   constructor() { }
 
@@ -58,7 +60,7 @@ export class HubComponent implements OnInit {
 
   loadTerrain(){
     this.modelLoader.initTerrain(this.scene,'../assets/Terrain/jotunheimen.bin','../assets/images/rock.jpg',new PlaneGeometry(60, 60, 199, 199));
-    this.modelLoader.loadModel(this.loader,this.scene,"../assets/HUB/FinalRoom.glb","hub",1,[0,0,0],[0,0,0]);
+    this.modelLoader.loadModel(this.loader,this.scene,"../assets/HUB/FinalRoom-processed.glb","hub",1,[0,0,0],[0,0,0]);
     this.modelLoader.loadModel(this.loader,this.scene,"../assets/HUB/showcaseKader.glb","showcaseKader",1,[0,0,0],[0,0,0]);
     this.modelLoader.loadModel(this.loader,this.scene,"../assets/HUB/questionMark.glb","question",1,[0,0,0],[0,0,0]);
     this.modelLoader.loadModel(this.loader,this.scene,"../assets/3D_models/drone/DroneAllInOne.glb","droneShowRoom",1,[0,0,0],[0,0,0]);
