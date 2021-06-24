@@ -17,7 +17,7 @@ export class ShowroomComponent implements OnInit {
   mobile = "";
 
   async fetchProjects() : Promise<Response>{
-    const req = await fetch("https://finalshowcase.herokuapp.com/final-work/get-all");
+    const req = await fetch('https://finalshowcase.herokuapp.com/final-work/get-all');
     return await req.json();
   }
 
@@ -26,9 +26,16 @@ export class ShowroomComponent implements OnInit {
     return await req.json();
   }
 
+  async fetchNominees() : Promise<Response> {
+    const req = await fetch('http://193.191.183.48:3000/admin/get-nominations');
+    return await req.json();
+  }
+
   loadProjects(){
     this.fetchProjects().then((data : any)=>{
-      this.sortProjects(data)
+      this.fetchNominees().then((nominees) => {
+      this.sortProjects(data, nominees);
+      })
     });
   }
 
@@ -38,7 +45,8 @@ export class ShowroomComponent implements OnInit {
     })
   }
 
-  sortProjects(data : any){
+  sortProjects(data : any, nominees : any){
+    console.log(nominees);
     data.forEach((project : any) => {
       const htmlString : String = `
       <div class="card">
@@ -104,9 +112,6 @@ export class ShowroomComponent implements OnInit {
         }
       }, 400);
   }
-
-  
-
 
   page(project: any){
     console.log(project);
