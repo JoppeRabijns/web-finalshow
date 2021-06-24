@@ -82,7 +82,7 @@ export class ShowroomComponent implements OnInit {
             <h3 class="card-subtitle">${project.username}</h3>
           </div>
           <div class="card-body-more">
-            <a class="card-btn"><img class="arrow" src="../../src/assets/images/arrow.svg"></a>
+            <a class="card-btn"><img class="arrow" src="../../assets/images/arrowDetailPage.svg"></a>
           </div>
         </div>
       </div>`;
