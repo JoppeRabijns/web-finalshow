@@ -185,19 +185,12 @@ p {
 }
 
 .upper-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 980px;
   padding: 0px 5px;
-
-
 }
 
 .wrapper {
-  display: flex;
-  justify-content: center;
-  width: calc(100vw - 20px);
+  width: 65vw;
+  margin: auto;
 }
 
 .upper-nav h3 {
