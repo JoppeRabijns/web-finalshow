@@ -50,8 +50,6 @@ export class ModelLoaderService {
     resultData = data;
     var geometry = planeGeometry;
 
-    console.log(geometry);
-
     const position = geometry.attributes.position;
     
     const vector = new THREE.Vector3();

@@ -40,7 +40,6 @@ export class AnimatedTextComponent implements OnInit {
         bevelSegments: 1
       } );      
 
-      var black = new MeshLambertMaterial({color: 'rgb(0,0,0)'});
       var material = new MeshLambertMaterial({color: 'rgb(139,0,0)'});
       var mesh = new Mesh(geometry, material);
       var mesh1 = new Mesh(geometry1, material);
