@@ -18,6 +18,7 @@ import * as THREE from 'three';
   
 })
 export class HubComponent implements OnInit {
+  loading = true;
   title = 'finalshow';
   manager = new THREE.LoadingManager();
   scene = new THREE.Scene();
@@ -138,6 +139,10 @@ render(){
       this.addPOIS();
       this.animate();
       this.goTo2D();
+      this.loadingDone();
     };
+  }
+  loadingDone() {
+    this.loading = false;
   }
 }
