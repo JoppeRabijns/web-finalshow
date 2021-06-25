@@ -32,6 +32,12 @@ export class CountdownTimerComponent implements OnInit {
 
     private getTimeDifference () {
         this.timeDifference = this.dDay.getTime() - new  Date().getTime();
+        
+      if(this.timeDifference<=0){
+        document.getElementById("timer")!.style.display="none";
+      }
+
+
         this.allocateTimeUnits(this.timeDifference);
     }
 
