@@ -52,7 +52,6 @@ export class ShowroomComponent implements OnInit {
       for (let project of value) {
         nomineesID.push(project.projectid);
       }
-      //@ts-check
     }
     
     data.forEach((project: any) => {

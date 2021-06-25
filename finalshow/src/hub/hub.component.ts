@@ -65,9 +65,9 @@ export class HubComponent implements OnInit {
     window.location.href = window.location.href;
   }
 
-  loadTerrain(){
+  loadModels(){
     this.modelLoader.initTerrain(this.scene,'../assets/Terrain/jotunheimen.bin','../assets/images/rock.jpg',new THREE.PlaneGeometry(60, 60, 199, 199));
-    this.modelLoader.loadModel(this.loader,this.scene,"../assets/HUB/FinalRoom-processed.glb","hub",1,[0,0,0],[0,0,0]);
+    this.modelLoader.loadModel(this.loader,this.scene,"../assets/HUB/FinalRoomFinal-processed.glb","hub",1,[0,0,0],[0,0,0]);
     this.modelLoader.loadModel(this.loader,this.scene,"../assets/HUB/showcaseKader.glb","showcaseKader",1,[0,0,0],[0,0,0]);
     this.modelLoader.loadModel(this.loader,this.scene,"../assets/HUB/questionMark.glb","question",1,[0,0,0],[0,0,0]);
     this.modelLoader.loadModel(this.loader,this.scene,"../assets/3D_models/drone/DroneAllInOne-processed.glb","droneShowRoom",1,[0,0,0],[0,0,0]);
@@ -126,9 +126,10 @@ render(){
   }
 
   ngOnInit() {
+    THREE.Cache.enabled=true;
     this.dracoLoad();
     this.orbitControls();
-    this.loadTerrain();
+    this.loadModels();
     this.render();
     this.livestream.youtubeStream('8_vkiGBjhOI', -53, 4.5, -0.75, Math.PI/2,this.cssscene);
     this.manager.onLoad = () => {
