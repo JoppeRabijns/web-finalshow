@@ -108,7 +108,7 @@ export class ShowroomComponent implements OnInit {
           };
         }
         htmlString += `<h2>${project.name}</h2>
-          <a href="mailto:${project.email}"><h3>${project.username}</h3></a>
+          <a  class="personName" href="mailto:${project.email}"><h3>${project.username}</h3></a>
           <h4>Beschrijving</h4>
           <p>${project.description}<br><br><a id="projectvideo" target="_blank" href="${project.url}">Bekijk de projectvideo</a></p>
           `;
@@ -131,7 +131,7 @@ export class ShowroomComponent implements OnInit {
           };
         }
         htmlString += `<h2>${project.name}</h2>
-          <a href="mailto:${project.email}"><h3>${project.username}</h3></a>
+          <a  class="personName" href="mailto:${project.email}"><h3>${project.username}</h3></a>
           <h4>Beschrijving</h4>
           <p>${project.description}<br><br><a id="projectvideo" target="_blank" href="${project.url}">Bekijk de projectvideo</a></p>
           `;
@@ -151,7 +151,7 @@ export class ShowroomComponent implements OnInit {
           };
         }
         htmlString += `<h2>${project.name}</h2>
-          <a href="mailto:${project.email}"><h3>${project.username}</h3></a>
+          <a  class="personName" href="mailto:${project.email}"><h3>${project.username}</h3></a>
           <h4>Beschrijving</h4>
           <p>${project.description}<br><br><a id="projectvideo" target="_blank" href="${project.url}">Bekijk de projectvideo</a></p>
           `;
