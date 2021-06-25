@@ -21,11 +21,11 @@ export class FaqComponent implements OnInit {
     },
     {
       title: 'Waar vind ik meer info over de opleiding?',
-      description: 'Meer info hierover kan je op de website van EHB vinden.'
+      description: 'Meer info hierover kan je op de website van EHB vinden via de link onderaan deze pagina.'
     },
     {
       title: 'Hoe kan ik de school contacteren?',
-      description: 'Meer info hierover kan je op de website van EHB vinden.'
+      description: 'Meer info hierover kan je op de website van EHB vinden via de link onderaan deze pagina.'
     }]
   
 
