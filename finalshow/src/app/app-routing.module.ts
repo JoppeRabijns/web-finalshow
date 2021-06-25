@@ -11,7 +11,8 @@ import { ShowroomComponent } from 'src/mobile/showroom/showroom.component';
 import { PreloaderComponent } from 'src/mobile/preloader/preloader.component';
 
 const desktop_routes: Routes = [
-  { path: '', component: AnimationComponent },
+  { path: '',   redirectTo: '/no-webgl', pathMatch: 'full' },
+  { path: 'scroll', component: AnimationComponent },
   { path: 'hub', component: HubComponent },
   { path: 'no-webgl', loadChildren: () => import('../no-webgl/no-webgl.module').then(m => m.NoWebglModule) },
 ];

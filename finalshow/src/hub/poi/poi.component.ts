@@ -35,7 +35,7 @@ export class PoiComponent implements OnInit {
         window.open("https://seads.network/");
       }
       if(intersect.object.name ==="Drone"){
-        window.location.href = '/';
+        window.location.href = '/scroll';
       }
       if(intersect.object.name ==="Showcase"){
         animationLaunch = true;
