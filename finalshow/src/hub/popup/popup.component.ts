@@ -11,6 +11,10 @@ import { ShowroomComponent } from '../showroom/showroom.component';
 })
 export class PopupComponent implements OnInit {
 
+  fetchedProjects: any[] = [];
+  fetchedNominees: any[] = [];
+  cluster: String = "web";
+
   showPopup(renderer:THREE.WebGLRenderer,cssrenderer:any,controls:ORBIT.OrbitControls,poiName:any){
 
     let popup=document.getElementById("popup");
@@ -200,7 +204,7 @@ export class PopupComponent implements OnInit {
     }
   }
 
-initFunctionFaq() {
+  initFunctionFaq() {
     //Script voor divs te doen verschijnen doormiddel van het klikken van één van de FAQ vragen in FAQ.html
     var faqButtons = document.querySelectorAll(".items");
     faqButtons.forEach(button => {
@@ -261,111 +265,118 @@ initFunctionFaq() {
   }
 
   initFunctionShowroom() {
-    var menubuttons = document.querySelectorAll("button");
-    var menucluster = "web";
-    menubuttons.forEach(button => {
-      button.addEventListener("click", function(){
-          menucluster = button.classList[0];
-          localStorage.setItem("cluster", menucluster);
-          window.location.href = "/no-webgl"
-      })
-    })
-
-  
-    //API call
-
-    const api_url = "https://finalshowcase.herokuapp.com/final-work/get-all";
-
-    var buttons = document.querySelectorAll(".bottom-menu a");
-    var cluster = localStorage.getItem("cluster")||"web";
-    document.querySelector(`a.${cluster}`).classList.add("active");
-    buttons.forEach(button => {
-        button.addEventListener("click", function(){
+    let fetchedProjects: any[] = this.fetchedProjects;
+    let fetchedNominees: any[] = this.fetchedNominees;
+    let cluster: String = this.cluster;
+    fetchProjects();    
+    
+    function fetchNominees(): any {
+        fetch("https://finalshowcase.herokuapp.com/admin/get-nominations").then((data: any) => {
+          data.json()
+            .then((nominees:any) => {
+              fetchedNominees = nominees;
+            }).then(() => {
+              displayData();
+            })
+        });
+      }
+    
+      function fetchProjects(): void {
+        fetch("https://finalshowcase.herokuapp.com/final-work/get-all").then((data: any) => {
+          data.json()
+            .then((projects:any) => {
+              fetchedProjects = projects
+            }).then(() => {
+              fetchNominees();
+            })
+        });
+      }
+    
+      function clusterMenu() {
+        const buttons = document.getElementsByClassName('bottom-menu-cluster');
+        console.log(buttons);
+        document.querySelector(`a.${cluster}`).classList.add("active");
+        for (let button of buttons as Array) {
+          button.addEventListener("click", () => {
             cluster = button.classList[0];
             button.classList.add("active");
-            var children = [].slice.call(button.parentNode.children);
-            children.forEach(child => {
-                if(child.classList[0] != cluster) {
-                    child.classList.remove("active");
-                }
-            });
-            getapi(api_url);
-        })
-    });
-
-
-
-    async function getapi(url) {
-        const response = await fetch(url);
-        var data = await response.json();
-        show(data);
-    }
-
-    getapi(api_url);
-
-    //Na API Call alle projecten inladen, rangschikken per cluster en deze printen adhv keuze gebruiker
-
-    function show(data) {
-        var started = false;
-        var projecten = data.filter(p => p.cluster == cluster);
+            const children = button.parentNode.children;
+            for (let child of children as array) {
+              if(child.classList[0] != cluster) {
+                child.classList.remove("active");
+              }
+            }
+            fetchProjects();
+          });
+        }
+      }
+    
+      function displayData() {
+        clusterMenu();
+        let nomineesID: String[] = [];
+        for (const [key, value] of Object.entries(fetchedNominees)) {
+          for (let project of value) {
+            nomineesID.push(project.projectid);
+          }
+        }
+        function renderCard(project: any, nomineesID: Number[]) {
+          let htmlString =`<img class="coverphoto" src="${project.images}">`;
+          if (project.superwinnaar){
+            htmlString += `<img src="../../assets/images/flagsuperNoWEBGL.png" class="showroomflag-winner" alt="...">`
+          } else if(project.winner){
+            htmlString += `<img src="../../assets/images/flagwinnerNoWEBGL.png" class="showroomflag-winner" alt="...">`
+          } else {
+            for (let id of nomineesID) {
+              if (id == project.projectid){
+              htmlString += `<img src="../../assets/images/flagnomineeNoWEBGL.png" class="showroomflag-nominee" alt="...">`
+              }
+            }
+          }
+          htmlString += `<h2>${project.name}</h2>
+            <a  class="personName" href="mailto:${project.email}"><h3>${project.username}</h3></a>
+            <h4>Beschrijving</h4>
+            <p>${project.description}<br><br><a id="projectvideo" target="_blank" href="${project.url}">Bekijk de projectvideo</a></p>
+            `;
+          document.querySelector(".projecten").innerHTML = htmlString;
+        }
+        let started = false;
+        const projecten = fetchedProjects.filter(p => p.cluster == cluster);
         Array.prototype.next = function() {
-
             return this[++this.current];
-
         };
         Array.prototype.prev = function() {
             return this[--this.current];
         };
         Array.prototype.current = 0;
+    
         document.querySelector(".hoeveelheid").innerHTML = `${projecten.current+1}/${projecten.length}`;
         var project = projecten[0];
         var nextProject = document.querySelector(".right");
         var previousProject = document.querySelector(".left");
+    
         nextProject.addEventListener("click", function(){
-        
-            if (projecten.length-1 == projecten.current){
-                projecten.current = -1;
-            }
-            project = projecten.next();
-
-
-            document.querySelector(".hoeveelheid").innerHTML = `${projecten.current+1}/${projecten.length}`;
-            document.querySelector(".projecten").innerHTML = `
-            <img class="coverphoto" src="${project.images}">
-            <h2>${project.name}</h2>
-            <a href="mailto:${project.email}"><h3>${project.username}</h3></a>
-            <h4>Beschrijving</h4>
-            <p>${project.description}<br><br><a id="projectvideo" target="_blank" href="${project.url}">Bekijk de projectvideo</a></p>
-            `;
+          if (projecten.length-1 == projecten.current){
+              projecten.current = -1;
+          }
+          project = projecten.next();
+          document.querySelector(".hoeveelheid").innerHTML = `${projecten.current+1}/${projecten.length}`;
+          renderCard(project, nomineesID);
         });
+    
         previousProject.addEventListener("click", function(){
-            if (projecten.current == 0){
-                projecten.current = projecten.length;
-            }
-            project = projecten.prev();
-            document.querySelector(".hoeveelheid").innerHTML = `${projecten.current+1}/${projecten.length}`;
-            document.querySelector(".projecten").innerHTML = `
-            <img class="coverphoto" src="${project.images}">
-            <h2>${project.name}</h2>
-            <a href="mailto:${project.email}"><h3>${project.username}</h3></a>
-            <h4>Beschrijving</h4>
-            <p>${project.description}<br><br><a id="projectvideo" target="_blank" href="${project.url}">Bekijk de projectvideo</a></p>
-            `;
-
+          if (projecten.current == 0){
+              projecten.current = projecten.length;
+          }
+          project = projecten.prev();
+          document.querySelector(".hoeveelheid").innerHTML = `${projecten.current+1}/${projecten.length}`;
+          renderCard(project, nomineesID)
         });
-      
-      
+    
         if(!started) {
-            document.querySelector(".projecten").innerHTML = `
-            <img class="coverphoto" src="${project.images}">
-            <h2>${project.name}</h2>
-            <a href="mailto:${project.email}"><h3>${project.username}</h3></a>
-            <h4>Beschrijving</h4>
-            <p>${project.description}<br><br><a id="projectvideo" target="_blank" href="${project.url}">Bekijk de projectvideo</a></p>
-            `;
-            started = true;
+          renderCard(project, nomineesID);
+          started = true;
         }
-    }
+      }
   }
 
   removeInnerhtml(controls:any, renderer:any, cssrenderer:any){
