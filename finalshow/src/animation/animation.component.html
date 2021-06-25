@@ -1,5 +1,11 @@
-<body (window:load)="onLoad()" (window:resize)="onResizeWindow($event)">
+<body [className]="loading ? 'scroll-lock' : 'no-scroll-lock'" (window:load)="onLoad()"
+  (window:resize)="onResizeWindow($event)">
   <!-- <div class="bg_img"></div> -->
+
+  <div *ngIf="loading"><img class="loading" src="../assets/images/animated intro_4.gif" alt="" srcset="">
+    <p class="">3D modellen worden geladen...</p>
+  </div>
+
   <div class="innerbody" id="innerbody">
     <div id="tsparticles"></div>
     <a routerLink="/no-webgl" class="skip no-webgl">Klik hier indien u geen 3D-ervaring wenst</a>
