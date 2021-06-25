@@ -1,12 +1,15 @@
 //@ts-nocheck
 import { Component, OnInit } from '@angular/core';
-
 @Component({
   selector: 'app-showroom',
   templateUrl: './showroom.component.html',
   styleUrls: ['./showroom.component.scss']
 })
 export class ShowroomComponent implements OnInit {
+
+  fetchedProjects: any[] = [];
+  fetchedNominees: any[] = [];
+  cluster: String = "web";
 
   constructor() { }
 
@@ -15,16 +18,25 @@ export class ShowroomComponent implements OnInit {
       window.location.href = '/hub';
     })
   }
-  async fetchNominees(): Promise<Response> {
-    const req = await fetch('https://finalshowcase.herokuapp.com/admin/get-nominations');
-    return await req.json();
+  fetchNominees(): any {
+    fetch("https://finalshowcase.herokuapp.com/admin/get-nominations").then((data: any) => {
+      data.json()
+        .then((nominees:any) => {
+          this.fetchedNominees = nominees;
+        }).then(() => {
+          this.displayData();
+        })
+    });
   }
 
-  fetchProjects(): Promise<Response>{
-    return fetch("https://finalshowcase.herokuapp.com/final-work/get-all").then((req: any) => {
-      return req.json().then((data: any) => {
-        return data;
-      });
+  fetchProjects(): void {
+    fetch("https://finalshowcase.herokuapp.com/final-work/get-all").then((data: any) => {
+      data.json()
+        .then((projects:any) => {
+          this.fetchedProjects = projects
+        }).then(() => {
+          this.fetchNominees();
+        })
     });
   }
 
@@ -35,130 +47,93 @@ export class ShowroomComponent implements OnInit {
 
   clusterMenu(): String {
     const buttons = document.getElementsByClassName('bottom-menu-cluster');
-    let cluster = "web";
-    document.querySelector(`a.${cluster}`).classList.add("active");
+
+    document.querySelector(`a.${this.cluster}`).classList.add("active");
     for (let button of buttons as Array) {
       button.addEventListener("click", () => {
-        cluster = button.classList[0];
+        this.cluster = button.classList[0];
         button.classList.add("active");
         const children = button.parentNode.children;
         for (let child of children as array) {
-          if(child.classList[0] != cluster) {
+          if(child.classList[0] != this.cluster) {
             child.classList.remove("active");
           }
         }
-        //getapi(api_url);
+        this.fetchProjects();
       });
     }
-    return cluster;
+  }
+
+  displayData() {
+    this.clusterMenu();
+    let cluster: String = this.cluster;
+    let nomineesID: String[] = [];
+    for (const [key, value] of Object.entries(this.fetchedNominees)) {
+      for (let project of value) {
+        nomineesID.push(project.projectid);
+      }
+    }
+    function renderCard(project: any, nomineesID: Number[]) {
+      let htmlString =`<img class="coverphoto" src="${project.images}">`;
+      if (project.superwinnaar){
+        htmlString += `<img src="../../assets/images/flagsuperNoWEBGL.png" class="showroomflag-winner" alt="...">`
+      } else if(project.winner){
+        htmlString += `<img src="../../assets/images/flagwinnerNoWEBGL.png" class="showroomflag-winner" alt="...">`
+      } else {
+        for (let id of nomineesID) {
+          if (id == project.projectid){
+          htmlString += `<img src="../../assets/images/flagnomineeNoWEBGL.png" class="showroomflag-nominee" alt="...">`
+          }
+        }
+      }
+      htmlString += `<h2>${project.name}</h2>
+        <a  class="personName" href="mailto:${project.email}"><h3>${project.username}</h3></a>
+        <h4>Beschrijving</h4>
+        <p>${project.description}<br><br><a id="projectvideo" target="_blank" href="${project.url}">Bekijk de projectvideo</a></p>
+        `;
+      document.querySelector(".projecten").innerHTML = htmlString;
+    }
+    let started = false;
+    const projecten = this.fetchedProjects.filter(p => p.cluster == cluster);
+    Array.prototype.next = function() {
+        return this[++this.current];
+    };
+    Array.prototype.prev = function() {
+        return this[--this.current];
+    };
+    Array.prototype.current = 0;
+
+    document.querySelector(".hoeveelheid").innerHTML = `${projecten.current+1}/${projecten.length}`;
+    var project = projecten[0];
+    var nextProject = document.querySelector(".right");
+    var previousProject = document.querySelector(".left");
+
+    nextProject.addEventListener("click", function(){
+      if (projecten.length-1 == projecten.current){
+          projecten.current = -1;
+      }
+      project = projecten.next();
+      document.querySelector(".hoeveelheid").innerHTML = `${projecten.current+1}/${projecten.length}`;
+      renderCard(project, nomineesID);
+    });
+
+    previousProject.addEventListener("click", function(){
+      if (projecten.current == 0){
+          projecten.current = projecten.length;
+      }
+      project = projecten.prev();
+      document.querySelector(".hoeveelheid").innerHTML = `${projecten.current+1}/${projecten.length}`;
+      renderCard(project, nomineesID)
+    });
+
+    if(!started) {
+      renderCard(project, nomineesID);
+      started = true;
+    }
   }
 
   ngOnInit() {
-    this.goTo2D();
-    let cluster = this.clusterMenu();
-    this.fetchProjects().then((data: any) => {
-      displayData(data);
-    });
-  
-    //API call
-
-    //getapi(api_url);
-
-    //Na API Call alle projecten inladen, rangschikken per cluster en deze printen adhv keuze gebruiker
-
-    function displayData(data) {
-      let nomineesID: String[] = [];
-      fetch('https://finalshowcase.herokuapp.com/final-work/get-all').then((clusters: any) => {
-        for (const [key, value] of Object.entries(clusters)) {
-          //@ts-ignore
-          for (let project of value) {
-            nomineesID.push(project.projectid);
-          }
-          //@ts-check
-        }
-      })
-
-      let started = false;
-      const projecten = data.filter(p => p.cluster == cluster);
-      Array.prototype.next = function() {
-          return this[++this.current];
-      };
-      Array.prototype.prev = function() {
-          return this[--this.current];
-      };
-      Array.prototype.current = 0;
-      document.querySelector(".hoeveelheid").innerHTML = `${projecten.current+1}/${projecten.length}`;
-      var project = projecten[0];
-      var nextProject = document.querySelector(".right");
-      var previousProject = document.querySelector(".left");
-      nextProject.addEventListener("click", function(){
-        if (projecten.length-1 == projecten.current){
-            projecten.current = -1;
-        }
-        project = projecten.next();
-        document.querySelector(".hoeveelheid").innerHTML = `${projecten.current+1}/${projecten.length}`;
-        let htmlString =`<img class="coverphoto" src="${project.images}">`;
-        if(project.winner){
-          htmlString += `<img src="../../assets/images/flagwinnerNoWEBGL.svg" class="showroomflag-winner" alt="...">`
-        }else {
-          for (let id of nomineesID) {
-            if (id == project.projectid){
-            htmlString += `<img src="../../assets/images/flagnomineeNoWEBGL.svg" class="showroomflag-nominee" alt="...">`
-            }
-          };
-        }
-        htmlString += `<h2>${project.name}</h2>
-          <a  class="personName" href="mailto:${project.email}"><h3>${project.username}</h3></a>
-          <h4>Beschrijving</h4>
-          <p>${project.description}<br><br><a id="projectvideo" target="_blank" href="${project.url}">Bekijk de projectvideo</a></p>
-          `;
-        document.querySelector(".projecten").innerHTML = htmlString;
-      });
-      previousProject.addEventListener("click", function(){
-        if (projecten.current == 0){
-            projecten.current = projecten.length;
-        }
-        project = projecten.prev();
-        document.querySelector(".hoeveelheid").innerHTML = `${projecten.current+1}/${projecten.length}`;
-        let htmlString =`<img class="coverphoto" src="${project.images}">`;
-        if(project.winner){
-          htmlString += `<img src="../../assets/images/flagwinnerNoWEBGL.svg" class="showroomflag-winner" alt="...">`
-        }else {
-          for (let id of nomineesID) {
-            if (id == project.projectid){
-            htmlString += `<img src="../../assets/images/flagnomineeNoWEBGL.svg" class="showroomflag-nominee" alt="...">`
-            }
-          };
-        }
-        htmlString += `<h2>${project.name}</h2>
-          <a  class="personName" href="mailto:${project.email}"><h3>${project.username}</h3></a>
-          <h4>Beschrijving</h4>
-          <p>${project.description}<br><br><a id="projectvideo" target="_blank" href="${project.url}">Bekijk de projectvideo</a></p>
-          `;
-        document.querySelector(".projecten").innerHTML = htmlString;
-      });
-    
-    
-      if(!started) {
-        let htmlString =`<img class="coverphoto" src="${project.images}">`;
-        if(project.winner){
-          htmlString += `<img src="../../assets/images/flagwinnerNoWEBGL.svg" class="showroomflag-winner" alt="...">`
-        }else {
-          for (let id of nomineesID) {
-            if (id == project.projectid){
-            htmlString += `<img src="../../assets/images/flagnomineeNoWEBGL.svg" class="showroomflag-nominee" alt="...">`
-            }
-          };
-        }
-        htmlString += `<h2>${project.name}</h2>
-          <a  class="personName" href="mailto:${project.email}"><h3>${project.username}</h3></a>
-          <h4>Beschrijving</h4>
-          <p>${project.description}<br><br><a id="projectvideo" target="_blank" href="${project.url}">Bekijk de projectvideo</a></p>
-          `;
-        document.querySelector(".projecten").innerHTML = htmlString;
-        started = true;
-      }
-    }
+    this.goTo2D();  
+    this.fetchProjects();
   }
-
 }
