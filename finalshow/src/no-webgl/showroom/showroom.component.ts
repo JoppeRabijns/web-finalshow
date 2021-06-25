@@ -17,7 +17,7 @@ export class ShowroomComponent implements OnInit {
   }
 
   async fetchNominees(): Promise<Response> {
-    const req = await fetch('http://193.191.183.48:3000/admin/get-nominations');
+    const req = await fetch('https://finalshowcase.herokuapp.com/admin/get-nominations');
     return await req.json();
   }
 
