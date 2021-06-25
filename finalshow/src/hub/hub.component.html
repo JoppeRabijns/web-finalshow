@@ -1,4 +1,5 @@
 <body (window:mousemove)="mousePosition($event)" (window:click)="interestPoints($event)">
+
   <div id="showPopup">
     <app-popup></app-popup>
   </div>
@@ -7,4 +8,8 @@
 
   <p id="linkTo2D" class="linkTo2D">Naar 2D-versie</p>
 
+
+  <div *ngIf="loading" class="loadingDiv"><img class="loading" src="../assets/images/animated intro_4.gif">
+    <p class="loadingTekst">3D ruimte wordt geladen...</p>
+  </div>
 </body>

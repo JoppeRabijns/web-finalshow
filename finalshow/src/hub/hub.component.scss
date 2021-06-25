@@ -26,8 +26,31 @@
   z-index: 100;
   position: absolute;
   right: 0;
-  top: 0%;
+  top: 0;
   padding: 15px;
   color: white;
   background-color: #CD9DC8;
+}
+
+.loadingDiv {
+  text-align: center;
+  z-index: 100;
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: black;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+}
+
+.loading {
+  height: 80vh;
+  width: auto;
+  z-index: 101;
+}
+
+.loadingTekst {
+  margin: 0;
+  padding: 0;
 }
