@@ -2,7 +2,7 @@
   (window:resize)="onResizeWindow($event)">
   <!-- <div class="bg_img"></div> -->
 
-  <div *ngIf="loading"><img class="loading" src="../assets/images/animated intro_4.gif" alt="" srcset="">
+  <div *ngIf="loading"><img class="loading" id="loading" src="../assets/images/animated intro_4.gif" alt="" srcset="">
     <p class="">3D modellen worden geladen...</p>
   </div>
 
@@ -24,6 +24,5 @@
       </p>
     </footer>
   </div>
-  <app-loading></app-loading>
   <div id="renderContainer"></div>
 </body>
