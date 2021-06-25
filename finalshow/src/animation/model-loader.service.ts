@@ -65,6 +65,7 @@ export class ModelLoaderService {
         positions.push(vector.z);
     }
     const typedArray = Float32Array.from(positions);
+ 
     geometry.setAttribute('position', new THREE.BufferAttribute(typedArray, 3));
    
     let stone = new THREE.TextureLoader().load(textureFile);
