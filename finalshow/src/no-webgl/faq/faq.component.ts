@@ -11,7 +11,7 @@ export class FaqComponent implements OnInit {
   constructor() { }
 
   goTo2D(){
-      window.location.href = '/hub';
+      window.location.href = 'https://finalshow.herokuapp.com/hub';
   }
 
   ngOnInit() {

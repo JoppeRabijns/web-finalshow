@@ -16,7 +16,7 @@ export class ShowroomComponent implements OnInit {
 
   goTo2D(){
     document.getElementById('linkTo2D')?.addEventListener('click', function(){
-      window.location.href = '/hub';
+      window.location.href = 'https://finalshow.herokuapp.com/hub';
     })
   }
   fetchNominees(): any {
