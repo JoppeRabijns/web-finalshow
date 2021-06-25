@@ -6,13 +6,9 @@ import * as THREE from 'three';
   providedIn: 'root'
 })
 export class ModelLoaderService {
-
   // gui=new GuiService();
-
   constructor() { }
-
   loadModel(loader:any, scene:any,url:string,guiName:string,scale:number,rotation:number[],position:number[],renderer?:any,scroll?:any){
-
     // const gui=this.gui;
     loader.load(url, function ( gltf:any ) {
       let model = gltf.scene;
@@ -32,14 +28,11 @@ export class ModelLoaderService {
         if(guiName == "drone"){
           scroll.droneAnim(renderer,scene);
         } 
-
       }, 100);
       // gui.scale(guiName,model,false,-100,100,0.1);
       // gui.position(guiName,model,false,-100,100,0.1);
     });
-
   }
-
   private loadTerrain(file: any, callback: any) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'arraybuffer';
@@ -51,13 +44,10 @@ export class ModelLoaderService {
     };  
     xhr.send(null);
   }
-
-
   initTerrain(scene:any,terrainFile:any,textureFile:any,planeGeometry:any){
     let resultData: any;
     this.loadTerrain(terrainFile, function(data: any) {
     resultData = data;
-
     var geometry = planeGeometry;
 
     console.log(geometry);
@@ -66,7 +56,7 @@ export class ModelLoaderService {
     
     const vector = new THREE.Vector3();
     let positions: any = [];
-   
+
     for ( let i = 0, l = position.count; i < l; i ++ ) {
         vector.fromBufferAttribute( position, i );
         vector.setZ(resultData[i] / 65535 * 8);
@@ -75,8 +65,8 @@ export class ModelLoaderService {
         positions.push(vector.z);
     }
     const typedArray = Float32Array.from(positions);
-    geometry.setAttribute(positions, new THREE.BufferAttribute(typedArray, 3));
-
+    geometry.setAttribute('position', new THREE.BufferAttribute(typedArray, 3));
+   
     let stone = new THREE.TextureLoader().load(textureFile);
     stone.wrapS = THREE.RepeatWrapping;
     stone.wrapT = THREE.RepeatWrapping;
