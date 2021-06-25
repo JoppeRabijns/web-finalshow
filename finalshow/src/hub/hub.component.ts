@@ -37,7 +37,7 @@ export class HubComponent implements OnInit {
   audio=new Audio();
   poi=new PoiComponent();
   popupActive=false;
-  playlist=new Array('../assets/sounds/chill-sakura-hz-no-copyright-music.mp3','../assets/sounds/no-copyright-music-funky-groove-funk-music-by-mokka-groove-with-me.mp3','../assets/sounds/5-minutes-of-silence-with-a-black-background.mp3');
+  playlist=new Array('assets/sounds/chill-sakura-hz-no-copyright-music.mp3','assets/sounds/no-copyright-music-funky-groove-funk-music-by-mokka-groove-with-me.mp3','assets/sounds/5-minutes-of-silence-with-a-black-background.mp3');
   animationLaunch=false;
   animations=new AnimationsComponent();
   draco=new DRACOLoader();
