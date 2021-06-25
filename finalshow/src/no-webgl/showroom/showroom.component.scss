@@ -236,18 +236,18 @@ p {
 
 .left {
   float: left;
-  transform: rotate(180deg);
+  transform: rotate(180deg) scale(1.4);
   position: absolute;
   top: 50vh;
-  left: 10vw;
+  left: 11vw;
 }
 
 .right {
   float: right;
   position: absolute;
   top: 50vh;
-  right: 10vw;
-
+  right: 11vw;
+  transform: scale(1.4);
 }
 
 .bottom-menu a {

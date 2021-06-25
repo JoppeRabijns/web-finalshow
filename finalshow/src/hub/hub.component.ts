@@ -53,6 +53,7 @@ export class HubComponent implements OnInit {
   orbitControls(){
     this.controls.enableZoom = false;
     this.controls.rotateSpeed = 0.5;
+    this.controls.rotateSpeed *= -1;
     this.camera.position.set(1,0,0);
     this.controls.minPolarAngle=1.5;
     this.controls.maxPolarAngle=1.5;

@@ -40,10 +40,10 @@ export class PopupComponent implements OnInit {
                 <div class="projecten"></div>
                 <div class="bottom-menu">
                     <a class="web"><h5>Web</h5></a>
-                    <a class="mobile"><h5>Mobile Appliance</h5></a>
                     <a class="ar"><h5>Alternate Reality</h5></a>
                     <a class="motion"><h5>Interactive Motion</h5></a>
                     <a class="digital-making"><h5>Digital Making</h5></a>
+                    <a class="mobile"><h5>Mobile Appliance</h5></a>
                 </div>
             </div>`;
             this.initFunctionShowroom();
