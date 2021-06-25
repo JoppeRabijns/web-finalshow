@@ -18,6 +18,7 @@ import * as THREE from 'three';
   
 })
 export class HubComponent implements OnInit {
+  loading = true;
   title = 'finalshow';
   manager = new THREE.LoadingManager();
   scene = new THREE.Scene();
@@ -53,6 +54,7 @@ export class HubComponent implements OnInit {
   orbitControls(){
     this.controls.enableZoom = false;
     this.controls.rotateSpeed = 0.5;
+    this.controls.rotateSpeed *= -1;
     this.camera.position.set(1,0,0);
     this.controls.minPolarAngle=1.5;
     this.controls.maxPolarAngle=1.5;
@@ -128,7 +130,7 @@ render(){
     this.orbitControls();
     this.loadTerrain();
     this.render();
-    this.livestream.youtubeStream('xdzFzMn5OnE', -53, 4.5, -0.75, Math.PI/2,this.cssscene);
+    this.livestream.youtubeStream('8_vkiGBjhOI', -53, 4.5, -0.75, Math.PI/2,this.cssscene);
     this.manager.onLoad = () => {
       console.log('%cLoading complete!', 'font-weight: bold; color: red;');
       this.lights.addLights(this.scene);
@@ -136,6 +138,10 @@ render(){
       this.addPOIS();
       this.animate();
       this.goTo2D();
+      this.loadingDone();
     };
+  }
+  loadingDone() {
+    this.loading = false;
   }
 }

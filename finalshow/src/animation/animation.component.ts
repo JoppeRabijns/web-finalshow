@@ -15,6 +15,7 @@ import * as THREE from 'three';
   styleUrls: ['./animation.component.scss']
 })
 export class AnimationComponent implements OnInit {
+  loading = true;
   title = 'finalshow';
   manager = new THREE.LoadingManager();
   scene = new THREE.Scene();
@@ -111,6 +112,7 @@ export class AnimationComponent implements OnInit {
   }
 
   onLoad(){
+    console.log('TEST');
     //Source: https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/By_example/Detect_WebGL
     // Create canvas element. The canvas is not added to the
     // document itself, so it is never displayed in the
@@ -131,14 +133,18 @@ ngOnInit(): void {
   this.dracoLoad();
   this.loadModels();
   this.scrollAnimations();
+  this.skyBox.skybox(this.scene);
+  this.text.loadText(this.scene);
   this.manager.onLoad = () => {
     console.log('%cLoading complete!', 'font-weight: bold; color: red;');
-    this.text.loadText(this.scene);
     this.light.addLight(this.scene);
-    this.skyBox.skybox(this.scene);
     this.render();
     this.animate();
+    this.showSite();
   };  
 }
+  showSite() {
+    this.loading = false;
+  }
 
 }

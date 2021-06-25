@@ -187,3 +187,20 @@ footer {
   top: 15px;
   left: 8.4vw;
 }
+
+.loading {
+  height: 80vh;
+  width: auto;
+}
+
+
+.scroll-lock {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+}
+
+.no-scroll-lock {
+  overflow: visible;
+}
