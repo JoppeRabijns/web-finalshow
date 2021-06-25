@@ -9,7 +9,6 @@ import { ModelLoaderService } from 'src/animation/model-loader.service';
 import { LivestreamComponent } from './livestream/livestream.component';
 import { PoiComponent } from './poi/poi.component';
 import { AnimationsComponent } from './animations/animations.component';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-hub',
@@ -127,13 +126,7 @@ render(){
       this.skyBox.skybox(this.scene);
       this.addPOIS();
       this.animate();
-      Swal.fire({
-        title: 'Klik op de hexagonen in de ruimte om deze te verkennen!',
-        text: "Of druk meteen op de livestream om deze te starten!",
-        confirmButtonColor: '#CD9DC8',
-        confirmButtonText: 'Ik ben er klaar voor!'
-      })
-      this.goTo2D()
+      this.goTo2D();
     };
   }
 }
