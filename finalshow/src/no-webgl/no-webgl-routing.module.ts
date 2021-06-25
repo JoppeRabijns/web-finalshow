@@ -6,8 +6,8 @@ import { TimetableComponent } from './timetable/timetable.component';
 import { FaqComponent } from './faq/faq.component'; 
 
 const routes: Routes = [
-  { path: '', component: ShowroomComponent },
-  { path: 'livestream', component: LivestreamComponent },
+  { path: '', component: LivestreamComponent },
+  { path: 'showroom', component: ShowroomComponent },
   { path: 'timetable', component: TimetableComponent },
   { path: 'faq', component: FaqComponent },
 ];

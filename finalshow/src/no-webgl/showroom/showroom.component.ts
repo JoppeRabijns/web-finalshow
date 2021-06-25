@@ -76,13 +76,13 @@ export class ShowroomComponent implements OnInit {
     function renderCard(project: any, nomineesID: Number[]) {
       let htmlString =`<img class="coverphoto" src="${project.images}">`;
       if (project.superwinnaar){
-        htmlString += `<img src="../../assets/images/flagsuperNoWEBGL.png" class="showroomflag-winner" alt="...">`
+        htmlString += `<img src="assets/images/flagsuperNoWEBGL.png" class="showroomflag-winner" alt="...">`
       } else if(project.winner){
-        htmlString += `<img src="../../assets/images/flagwinnerNoWEBGL.png" class="showroomflag-winner" alt="...">`
+        htmlString += `<img src="assets/images/flagwinnerNoWEBGL.png" class="showroomflag-winner" alt="...">`
       } else {
         for (let id of nomineesID) {
           if (id == project.projectid){
-          htmlString += `<img src="../../assets/images/flagnomineeNoWEBGL.png" class="showroomflag-nominee" alt="...">`
+          htmlString += `<img src="assets/images/flagnomineeNoWEBGL.png" class="showroomflag-nominee" alt="...">`
           }
         }
       }

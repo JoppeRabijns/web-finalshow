@@ -9,7 +9,7 @@ import { PopupComponent } from '../popup/popup.component';
 })
 export class PoiComponent implements OnInit {
 
-  POI_image="../assets/images/poi.png";
+  POI_image="assets/images/poi.png";
   popupComponent=new PopupComponent();
   musicPlaying = false;
 
@@ -35,7 +35,7 @@ export class PoiComponent implements OnInit {
         window.open("https://seads.network/");
       }
       if(intersect.object.name ==="Drone"){
-        window.location.href = '/';
+        window.location.href = '/scroll';
       }
       if(intersect.object.name ==="Showcase"){
         animationLaunch = true;
@@ -66,7 +66,7 @@ export class PoiComponent implements OnInit {
     
     intersects.forEach(function(intersect:any){
       if(intersect.object.type ==="Sprite"){
-        POI_image = "../assets/images/hoverpoi.png";
+        POI_image = "assets/images/hoverpoi.png";
       }
   });
 
