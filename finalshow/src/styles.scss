@@ -70,6 +70,7 @@ canvas {
       margin-left: 5px;
     }
   }
+
   //BODY
   .card-body {
     box-sizing: border-box;
@@ -116,7 +117,8 @@ canvas {
 //----------------------------------//
 
 .detail-desc {
-  padding-bottom: 20px;
+  padding: 0 15px 20px;
+
 }
 
 .card-mail {
@@ -154,10 +156,14 @@ canvas {
 }
 
 .pop-up {
-  h2, h4, p {
+
+  h2,
+  h4,
+  p {
     margin-left: 10%;
   }
 }
+
 .pop-up p {
   margin-right: 10%;
   font-size: 14px;
@@ -184,33 +190,35 @@ canvas {
   padding-bottom: 3px;
 }
 
-.showroomflag-nominee{
+.showroomflag-nominee {
   position: absolute;
   z-index: 99;
-  top:4.5vh;
+  top: 4.5vh;
   width: 20%;
   left: 0;
 }
-.showroomflag-nominee-text{
+
+.showroomflag-nominee-text {
   position: absolute;
   z-index: 99;
-  top:5.3vh;
-font-size:175%;
+  top: 5.3vh;
+  font-size: 175%;
   left: 2%;
 }
 
-.showroomflag-winner{
+.showroomflag-winner {
   position: absolute;
   z-index: 99;
-  top:4.5vh;
+  top: 4.5vh;
   width: 20%;
   left: 0;
 }
-.showroomflag-winner-text{
+
+.showroomflag-winner-text {
   position: absolute;
   z-index: 99;
   color: white !important;
-  top:5.3vh;
-font-size:175%;
+  top: 5.3vh;
+  font-size: 175%;
   left: 2%;
 }

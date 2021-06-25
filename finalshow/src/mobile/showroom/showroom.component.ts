@@ -17,7 +17,7 @@ export class ShowroomComponent implements OnInit {
   mobile = "";
 
   async fetchProjects(): Promise<Response>{
-    const req = await fetch("https://finalshowcase.herokuapp.com/final-work/get-all");
+    const req = await fetch("http://193.191.183.48:3000/final-work/get-all");
     return await req.json();
   }
 
@@ -34,7 +34,7 @@ export class ShowroomComponent implements OnInit {
   loadProjects(){
     this.fetchProjects().then((data: any)=>{
       this.fetchNominees().then((nominees) => {
-      this.sortProjects(data, nominees);
+        this.sortProjects(data, nominees);
       })
     });
   }
@@ -82,7 +82,7 @@ export class ShowroomComponent implements OnInit {
             <h3 class="card-subtitle">${project.username}</h3>
           </div>
           <div class="card-body-more">
-            <a class="card-btn"><img class="arrow" src="../../src/assets/images/arrow.svg"></a>
+            <a class="card-btn"><img class="arrow" src="../../assets/images/arrowDetailPage.svg"></a>
           </div>
         </div>
       </div>`;
@@ -98,6 +98,7 @@ export class ShowroomComponent implements OnInit {
       else
         this.mobile += htmlString;    
     });
+    this.addEventListeners();
   }
 
   clusters(event: any){
@@ -177,7 +178,5 @@ export class ShowroomComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProjects();
-    this.addEventListeners();
   }
-
 }
