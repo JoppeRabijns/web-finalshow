@@ -128,6 +128,7 @@ export class AnimationComponent implements OnInit {
 
 ngOnInit(): void {
   window.onbeforeunload = function() {window.scrollTo(0,0);}
+  THREE.Cache.enabled=true;
   this.dracoLoad();
   this.loadModels();
   this.scrollAnimations();

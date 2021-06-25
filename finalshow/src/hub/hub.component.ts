@@ -124,6 +124,7 @@ render(){
   }
 
   ngOnInit() {
+    THREE.Cache.enabled=true;
     this.dracoLoad();
     this.orbitControls();
     this.loadTerrain();
