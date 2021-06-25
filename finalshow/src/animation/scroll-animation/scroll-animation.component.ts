@@ -17,8 +17,6 @@ export class ScrollAnimationComponent implements OnInit {
   scrollInit(renderer:any){
     gsap.registerPlugin(ScrollTrigger);
 
-        let loader = document.getElementById('box')!
-
         ScrollTrigger.create({
           trigger: renderer.domElement,
           start: "top top",
@@ -27,12 +25,7 @@ export class ScrollAnimationComponent implements OnInit {
         });
 
         function loading(){
-          const rendererContainer = document.getElementById('renderContainer')!
-          rendererContainer.style.display = 'none';
-          loader.style.display = "block";
-          setTimeout(() => {
-            window.location.href = "/hub";
-          }, 4000);
+          window.location.href = "/hub";
         }        
   }
 

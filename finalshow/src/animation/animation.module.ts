@@ -9,7 +9,6 @@ import { CountdownTimerComponent } from './countdown-timer/countdown-timer.compo
 import { SkyboxComponent } from './skybox/skybox.component';
 import { AnimatedTextComponent } from './animated-text/animated-text.component';
 import { LightComponent } from './light/light.component';
-import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   imports: [
@@ -23,7 +22,6 @@ import { LoadingComponent } from './loading/loading.component';
     SkyboxComponent,
     AnimatedTextComponent,
     LightComponent,
-    LoadingComponent,
   ]
 })
 export class AnimationModule { }
