@@ -9,6 +9,7 @@ export class ShowroomComponent implements OnInit {
 
   fetchedProjects: any[] = [];
   fetchedNominees: any[] = [];
+  fetchedSuperNominees: any[] = [];
   cluster: String = "web";
 
   constructor() { }
@@ -24,7 +25,7 @@ export class ShowroomComponent implements OnInit {
         .then((nominees:any) => {
           this.fetchedNominees = nominees;
         }).then(() => {
-          this.displayData();
+          this.fetchSuperNominees();
         })
     });
   }
@@ -39,6 +40,17 @@ export class ShowroomComponent implements OnInit {
         })
     });
   }
+
+  fetchSuperNominees() {
+    fetch("https://finalshowcase.herokuapp.com/admin/get-superprijs-nominations").then((data: any) => {
+      data.json()
+        .then((supers:any) => {
+          this.fetchedSuperNominees = supers;
+        }).then(() => {
+          this.displayData();
+        })
+    });
+}
 
   async fetchSingleProject(project: String): Promise<Response>{
     const req = await fetch(`https://finalshowcase.herokuapp.com/final-work/search-name/${project}`);
@@ -73,19 +85,28 @@ export class ShowroomComponent implements OnInit {
         nomineesID.push(project.projectid);
       }
     }
+    let supersID: Number[] = [];
+      for (const [key, value] of Object.entries(this.fetchedSuperNominees)) {
+        supersID.push(value.projectid);
+      }
     function renderCard(project: any, nomineesID: Number[]) {
       let htmlString =`<img class="coverphoto" src="${project.images}">`;
       if (project.superwinnaar){
         htmlString += `<img src="assets/images/flagsuperNoWEBGL.png" class="showroomflag-winner" alt="...">`
       } else if(project.winner){
         htmlString += `<img src="assets/images/flagwinnerNoWEBGL.png" class="showroomflag-winner" alt="...">`
-      } else {
-        for (let id of nomineesID) {
-          if (id == project.projectid){
-          htmlString += `<img src="assets/images/flagnomineeNoWEBGL.png" class="showroomflag-nominee" alt="...">`
+      } 
+      for (let id of supersID) {
+          if (id == project.projectid && !project.superwinnaar) {
+              htmlString += `<img src="assets/images/flagsupergenomineerdNoWEBGL.png" class="showroomflag-nominee2" alt="...">`
           }
+      }
+      for (let id of nomineesID) {
+        if (id == project.projectid && !project.winner){
+        htmlString += `<img src="assets/images/flagnomineeNoWEBGL.png" class="showroomflag-nominee" alt="...">`
         }
       }
+      
       htmlString += `<h2>${project.name}</h2>
         <a  class="personName" href="mailto:${project.email}"><h3>${project.username}</h3></a>
         <h4>Beschrijving</h4>
