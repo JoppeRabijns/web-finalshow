@@ -17,17 +17,17 @@ export class ShowroomComponent implements OnInit {
   mobile = "";
 
   async fetchProjects(): Promise<Response>{
-    const req = await fetch("http://193.191.183.48:3000/final-work/get-all");
+    const req = await fetch("https://finalshowcase.herokuapp.com/final-work/get-all");
     return await req.json();
   }
 
   async fetchSingleProject(project: String): Promise<Response>{
-    const req = await fetch(`http://193.191.183.48:3000/final-work/search-name/${project}`);
+    const req = await fetch(`https://finalshowcase.herokuapp.com/final-work/search-name/${project}`);
     return await req.json();
   }
 
   async fetchNominees(): Promise<Response> {
-    const req = await fetch('http://193.191.183.48:3000/admin/get-nominations');
+    const req = await fetch('https://finalshowcase.herokuapp.com/admin/get-nominations');
     return await req.json();
   }
 
