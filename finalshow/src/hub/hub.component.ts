@@ -66,11 +66,11 @@ export class HubComponent implements OnInit {
   }
 
   loadModels(){
-    this.modelLoader.initTerrain(this.scene,'../assets/Terrain/jotunheimen.bin','../assets/images/rock.jpg',new THREE.PlaneGeometry(60, 60, 199, 199));
-    this.modelLoader.loadModel(this.loader,this.scene,"../assets/HUB/FinalRoomFinal-processed.glb","hub",1,[0,0,0],[0,0,0]);
-    this.modelLoader.loadModel(this.loader,this.scene,"../assets/HUB/showcaseKader.glb","showcaseKader",1,[0,0,0],[0,0,0]);
-    this.modelLoader.loadModel(this.loader,this.scene,"../assets/HUB/questionMark.glb","question",1,[0,0,0],[0,0,0]);
-    this.modelLoader.loadModel(this.loader,this.scene,"../assets/3D_models/drone/DroneAllInOne-processed.glb","droneShowRoom",1,[0,0,0],[0,0,0]);
+    this.modelLoader.initTerrain(this.scene,'assets/Terrain/jotunheimen.bin','assets/images/rock.jpg',new THREE.PlaneGeometry(60, 60, 199, 199));
+    this.modelLoader.loadModel(this.loader,this.scene,"assets/HUB/FinalRoomFinal-processed.glb","hub",1,[0,0,0],[0,0,0]);
+    this.modelLoader.loadModel(this.loader,this.scene,"assets/HUB/showcaseKader.glb","showcaseKader",1,[0,0,0],[0,0,0]);
+    this.modelLoader.loadModel(this.loader,this.scene,"assets/HUB/questionMark.glb","question",1,[0,0,0],[0,0,0]);
+    this.modelLoader.loadModel(this.loader,this.scene,"assets/3D_models/drone/DroneAllInOne-processed.glb","droneShowRoom",1,[0,0,0],[0,0,0]);
   }
 
   interestPoints(event:any){

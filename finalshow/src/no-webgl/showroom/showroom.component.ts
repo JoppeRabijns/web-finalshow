@@ -99,11 +99,11 @@ export class ShowroomComponent implements OnInit {
         document.querySelector(".hoeveelheid").innerHTML = `${projecten.current+1}/${projecten.length}`;
         let htmlString =`<img class="coverphoto" src="${project.images}">`;
         if(project.winner){
-          htmlString += `<img src="../../assets/images/flagwinnerNoWEBGL.svg" class="showroomflag-winner" alt="...">`
+          htmlString += `<img src="assets/images/flagwinnerNoWEBGL.svg" class="showroomflag-winner" alt="...">`
         }else {
           for (let id of nomineesID) {
             if (id == project.projectid){
-            htmlString += `<img src="../../assets/images/flagnomineeNoWEBGL.svg" class="showroomflag-nominee" alt="...">`
+            htmlString += `<img src="assets/images/flagnomineeNoWEBGL.svg" class="showroomflag-nominee" alt="...">`
             }
           };
         }
@@ -122,11 +122,11 @@ export class ShowroomComponent implements OnInit {
         document.querySelector(".hoeveelheid").innerHTML = `${projecten.current+1}/${projecten.length}`;
         let htmlString =`<img class="coverphoto" src="${project.images}">`;
         if(project.winner){
-          htmlString += `<img src="../../assets/images/flagwinnerNoWEBGL.svg" class="showroomflag-winner" alt="...">`
+          htmlString += `<img src="assets/images/flagwinnerNoWEBGL.svg" class="showroomflag-winner" alt="...">`
         }else {
           for (let id of nomineesID) {
             if (id == project.projectid){
-            htmlString += `<img src="../../assets/images/flagnomineeNoWEBGL.svg" class="showroomflag-nominee" alt="...">`
+            htmlString += `<img src="assets/images/flagnomineeNoWEBGL.svg" class="showroomflag-nominee" alt="...">`
             }
           };
         }
@@ -142,11 +142,11 @@ export class ShowroomComponent implements OnInit {
       if(!started) {
         let htmlString =`<img class="coverphoto" src="${project.images}">`;
         if(project.winner){
-          htmlString += `<img src="../../assets/images/flagwinnerNoWEBGL.svg" class="showroomflag-winner" alt="...">`
+          htmlString += `<img src="assets/images/flagwinnerNoWEBGL.svg" class="showroomflag-winner" alt="...">`
         }else {
           for (let id of nomineesID) {
             if (id == project.projectid){
-            htmlString += `<img src="../../assets/images/flagnomineeNoWEBGL.svg" class="showroomflag-nominee" alt="...">`
+            htmlString += `<img src="assets/images/flagnomineeNoWEBGL.svg" class="showroomflag-nominee" alt="...">`
             }
           };
         }

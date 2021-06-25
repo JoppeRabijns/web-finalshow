@@ -61,13 +61,13 @@ export class ShowroomComponent implements OnInit {
         `;
       if(project.winner){
         htmlString += `
-        <img src="../../assets/images/flagwinner.svg" class="flag" alt="...">
+        <img src="assets/images/flagwinner.svg" class="flag" alt="...">
         <h5 class="flag-text">Winnaar</h5>`
       }else {
         for (let id of nomineesID) {
           if (id == project.projectid){
           htmlString += `
-            <img src="../../assets/images/flagnominee.svg" class="flag flagnominee" alt="...">
+            <img src="assets/images/flagnominee.svg" class="flag flagnominee" alt="...">
             <h5 class="flag-text nominee">genomineerd</h5>`
           }
         };
@@ -81,7 +81,7 @@ export class ShowroomComponent implements OnInit {
             <h3 class="card-subtitle">${project.username}</h3>
           </div>
           <div class="card-body-more">
-            <a class="card-btn"><img class="arrow" src="../../assets/images/arrowDetailPage.svg"></a>
+            <a class="card-btn"><img class="arrow" src="assets/images/arrowDetailPage.svg"></a>
           </div>
         </div>
       </div>`;
