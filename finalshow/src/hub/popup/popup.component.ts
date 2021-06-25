@@ -201,10 +201,8 @@ export class PopupComponent implements OnInit {
   }
 
 initFunctionFaq() {
-  console.log('test');
     //Script voor divs te doen verschijnen doormiddel van het klikken van één van de FAQ vragen in FAQ.html
     var faqButtons = document.querySelectorAll(".items");
-    console.log(faqButtons);
     faqButtons.forEach(button => {
    
     button.addEventListener("click",function(){
@@ -268,7 +266,6 @@ initFunctionFaq() {
     menubuttons.forEach(button => {
       button.addEventListener("click", function(){
           menucluster = button.classList[0];
-          console.log(menucluster);
           localStorage.setItem("cluster", menucluster);
           window.location.href = "/no-webgl"
       })
@@ -300,11 +297,8 @@ initFunctionFaq() {
 
     async function getapi(url) {
         const response = await fetch(url);
-    
         var data = await response.json();
-
         show(data);
-
     }
 
     getapi(api_url);
@@ -336,7 +330,6 @@ initFunctionFaq() {
 
 
             document.querySelector(".hoeveelheid").innerHTML = `${projecten.current+1}/${projecten.length}`;
-            console.log("text");
             document.querySelector(".projecten").innerHTML = `
             <img class="coverphoto" src="${project.images}">
             <h2>${project.name}</h2>
@@ -351,7 +344,6 @@ initFunctionFaq() {
             }
             project = projecten.prev();
             document.querySelector(".hoeveelheid").innerHTML = `${projecten.current+1}/${projecten.length}`;
-            console.log("text");
             document.querySelector(".projecten").innerHTML = `
             <img class="coverphoto" src="${project.images}">
             <h2>${project.name}</h2>

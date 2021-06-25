@@ -22,12 +22,7 @@ export class PoiComponent implements OnInit {
     rayCaster.setFromCamera(mouse,camera);
     let intersects = rayCaster.intersectObjects(scene.children);
     intersects.forEach(function(intersect:any){
-      // if(intersect.object.name ==="Youtube"){
-      //   //window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=OfficialRickAstleyOfficialRickAstley")
-      //   console.log(document.getElementById("showPopup"));
-      //   document.getElementById("showPopup")!.style.display="block";
-      //   renderer.domElement.style.filter="blur(4px)";
-      // }
+
       if(intersect.object.type ==='Sprite'){
       }		
       if(intersect.object.name ==="FAQ"){
@@ -52,8 +47,7 @@ export class PoiComponent implements OnInit {
       if(intersect.object.name ==="Music"){
         musicPlaying = !musicPlaying;
         audio.volume = 0.1;
-        audio.src = playlist[0];  
-        console.log(musicPlaying);     
+        audio.src = playlist[0];      
         if (musicPlaying) {
           audio.play();
         } else{

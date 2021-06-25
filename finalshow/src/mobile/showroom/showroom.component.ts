@@ -138,7 +138,6 @@ export class ShowroomComponent implements OnInit {
   }
 
   page(project: any){
-    console.log(project);
 
     let htmlString = "";
     document.getElementById("clusters-container")!.style.display="none";

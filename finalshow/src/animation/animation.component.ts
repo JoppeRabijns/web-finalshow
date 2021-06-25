@@ -58,7 +58,7 @@ export class AnimationComponent implements OnInit {
   }
 
   loadModels(){
-    this.modelLoader.loadModel(this.loader, this.scene,'../assets/HUB/FinalRoomFinal-processed.glb',"room", 1,[0,-90,0],[0,20,0]);
+    this.modelLoader.loadModel(this.loader, this.scene,'../assets/HUB/FinalRoom-processed.glb',"room", 1,[0,-90,0],[0,20,0]);
     this.modelLoader.loadModel(this.loader, this.scene,'../assets/3D_models/drone/DroneAllInOne-processed.glb',"drone", 1,[0,-90,0],[0,-110,600],this.render,this.scroll);
     // this.modelLoader.loadModel(this.loader, this.scene,'../assets/3D_models/zeplin/AIrShip.glb',"zeplin",10,[0,0,0],[-400,80,80], this.render,this.scroll);
     this.modelLoader.initTerrain(this.scene,'../assets/Terrain/jotunheimen.bin','../assets/images/rock.jpg',new THREE.PlaneGeometry(240, 240, 200, 200));
