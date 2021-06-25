@@ -202,6 +202,14 @@ canvas {
   left: 0;
 }
 
+.showroomflag-nominee2 {
+  position: absolute;
+  z-index: 99;
+  top: 10vh;
+  width: 20%;
+  left: 0;
+}
+
 .showroomflag-nominee-text {
   position: absolute;
   z-index: 99;
@@ -214,6 +222,14 @@ canvas {
   position: absolute;
   z-index: 99;
   top: 4.5vh;
+  width: 20%;
+  left: 0;
+}
+
+.showroomflag-winner2 {
+  position: absolute;
+  z-index: 99;
+  top: 10vh;
   width: 20%;
   left: 0;
 }
