@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FontLoader, LoadingManager, PerspectiveCamera, PlaneGeometry, ReinhardToneMapping, Scene, sRGBEncoding, WebGLRenderer } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { ModelLoaderService } from './model-loader.service';
 import { SkyboxComponent } from './skybox/skybox.component';
@@ -17,13 +16,13 @@ import * as THREE from 'three';
 })
 export class AnimationComponent implements OnInit {
   title = 'finalshow';
-  manager = new LoadingManager();
-  scene = new Scene();
-  camera = new PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 10000 );
-  renderer = new WebGLRenderer();
+  manager = new THREE.LoadingManager();
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 10000 );
+  renderer = new THREE.WebGLRenderer();
   modelLoader=new ModelLoaderService();
   loader=new GLTFLoader(this.manager);
-  fontLoader=new FontLoader(this.manager);
+  fontLoader=new THREE.FontLoader(this.manager);
   skyBox=new SkyboxComponent();
   text=new AnimatedTextComponent();
   light=new LightComponent();
@@ -31,16 +30,22 @@ export class AnimationComponent implements OnInit {
   drone:any;
   room:any;
   cloud:any;
+  draco=new DRACOLoader();
   
   // Source: https://stackoverflow.com/questions/20290402/three-js-resizing-canvas
   onResizeWindow(event:any){
     window.location.href = window.location.href;
   }
 
+  dracoLoad(){
+    this.draco.setDecoderPath('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/js/libs/draco/');
+    this.loader.setDRACOLoader(this.draco);
+  }
+
   render(){
     this.renderer.shadowMap.enabled = true;
-    this.renderer.outputEncoding = sRGBEncoding;
-    this.renderer.toneMapping= ReinhardToneMapping;
+    this.renderer.outputEncoding = THREE.sRGBEncoding;
+    this.renderer.toneMapping= THREE.ReinhardToneMapping;
     this.renderer.toneMappingExposure = 0.6;
     this.renderer.setSize( window.innerWidth, window.innerHeight );
     this.camera.position.set(0,-40,700);
@@ -52,10 +57,10 @@ export class AnimationComponent implements OnInit {
   }
 
   loadModels(){
-    this.modelLoader.loadModel(this.loader, this.scene,'../assets/HUB/FinalRoom.glb',"room", 1,[0,-90,0],[0,20,0]);
-    this.modelLoader.loadModel(this.loader, this.scene,'../assets/3D_models/drone/DroneAllInOne.glb',"drone", 1,[0,-90,0],[0,-110,600],this.render,this.scroll);
+    this.modelLoader.loadModel(this.loader, this.scene,'../assets/HUB/FinalRoom-processed.glb',"room", 1,[0,-90,0],[0,20,0]);
+    this.modelLoader.loadModel(this.loader, this.scene,'../assets/3D_models/drone/DroneAllInOne-processed.glb',"drone", 1,[0,-90,0],[0,-110,600],this.render,this.scroll);
     // this.modelLoader.loadModel(this.loader, this.scene,'../assets/3D_models/zeplin/AIrShip.glb',"zeplin",10,[0,0,0],[-400,80,80], this.render,this.scroll);
-    this.modelLoader.initTerrain(this.scene,'../assets/Terrain/jotunheimen.bin','../assets/images/rock.jpg',new PlaneGeometry(240, 240, 200, 200));
+    this.modelLoader.initTerrain(this.scene,'../assets/Terrain/jotunheimen.bin','../assets/images/rock.jpg',new THREE.PlaneGeometry(240, 240, 200, 200));
     this.modelLoader.loadModel(this.loader, this.scene,'../assets/3D_models/balloon/luchtballon.glb',"luchtballon",10,[0,180,0],[150,-100,200], this.render,this.scroll);
   }
 
@@ -123,6 +128,7 @@ export class AnimationComponent implements OnInit {
 
 ngOnInit(): void {
   window.onbeforeunload = function() {window.scrollTo(0,0);}
+  this.dracoLoad();
   this.loadModels();
   this.scrollAnimations();
   this.manager.onLoad = () => {

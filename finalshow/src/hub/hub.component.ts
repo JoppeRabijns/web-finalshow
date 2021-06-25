@@ -1,6 +1,5 @@
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { Component, OnInit } from '@angular/core';
-import { LoadingManager, PerspectiveCamera, PlaneGeometry, Raycaster, Scene, Vector2, WebGLRenderer } from 'three';
 import * as ORBIT from 'three/examples/jsm/controls/OrbitControls';
 import { SkyboxComponent } from '../animation/skybox/skybox.component';
 import { LightsComponent } from './lights/lights.component';
@@ -11,6 +10,7 @@ import { PoiComponent } from './poi/poi.component';
 import { AnimationsComponent } from './animations/animations.component';
 import Swal from 'sweetalert2';
 import { DRACOLoader} from 'three/examples/jsm/loaders/DRACOLoader';
+import * as THREE from 'three';
 
 @Component({
   selector: 'app-hub',
@@ -20,20 +20,20 @@ import { DRACOLoader} from 'three/examples/jsm/loaders/DRACOLoader';
 })
 export class HubComponent implements OnInit {
   title = 'finalshow';
-  manager = new LoadingManager();
-  scene = new Scene();
-  camera = new PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 6000 );
-  renderer = new WebGLRenderer({antialias:true});
+  manager = new THREE.LoadingManager();
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 6000 );
+  renderer = new THREE.WebGLRenderer({antialias:true});
   controls = new ORBIT.OrbitControls( this.camera, this.renderer.domElement);
-  mouse = new Vector2();
+  mouse = new THREE.Vector2();
   skyBox=new SkyboxComponent();
   lights=new LightsComponent();
   livestream=new LivestreamComponent();
-  cssscene = new Scene();
+  cssscene = new THREE.Scene();
   renderer2 = new CSS3DRenderer();
   modelLoader=new ModelLoaderService();
   loader=new GLTFLoader(this.manager);
-  rayCaster=new Raycaster();
+  rayCaster=new THREE.Raycaster();
   audio=new Audio();
   poi=new PoiComponent();
   popupActive=false;
@@ -43,6 +43,12 @@ export class HubComponent implements OnInit {
   draco=new DRACOLoader();
 
   constructor() { }
+
+
+  dracoLoad(){
+    this.draco.setDecoderPath('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/js/libs/draco/');
+    this.loader.setDRACOLoader(this.draco);
+  }
 
 
   orbitControls(){
@@ -59,20 +65,20 @@ export class HubComponent implements OnInit {
   }
 
   loadTerrain(){
-    this.modelLoader.initTerrain(this.scene,'../assets/Terrain/jotunheimen.bin','../assets/images/rock.jpg',new PlaneGeometry(60, 60, 199, 199));
+    this.modelLoader.initTerrain(this.scene,'../assets/Terrain/jotunheimen.bin','../assets/images/rock.jpg',new THREE.PlaneGeometry(60, 60, 199, 199));
     this.modelLoader.loadModel(this.loader,this.scene,"../assets/HUB/FinalRoom-processed.glb","hub",1,[0,0,0],[0,0,0]);
     this.modelLoader.loadModel(this.loader,this.scene,"../assets/HUB/showcaseKader.glb","showcaseKader",1,[0,0,0],[0,0,0]);
     this.modelLoader.loadModel(this.loader,this.scene,"../assets/HUB/questionMark.glb","question",1,[0,0,0],[0,0,0]);
-    this.modelLoader.loadModel(this.loader,this.scene,"../assets/3D_models/drone/DroneAllInOne.glb","droneShowRoom",1,[0,0,0],[0,0,0]);
+    this.modelLoader.loadModel(this.loader,this.scene,"../assets/3D_models/drone/DroneAllInOne-processed.glb","droneShowRoom",1,[0,0,0],[0,0,0]);
   }
 
   interestPoints(event:any){
       this.poi.popup(event,this.renderer,this.rayCaster,this.mouse,this.camera,this.audio,this.playlist,this.animationLaunch,this.scene,this.renderer2,this.controls);
   }
 
-  // POIHover(e:any){
-  //   this.poi.hover(e,this.mouse,this.rayCaster,this.scene,this.camera);
-  // }
+  //  POIHover(e:any){
+  //    this.poi.hover(e,this.mouse,this.rayCaster,this.scene,this.camera);
+  //  }
 
   mousePosition(event:any){
     this.mouse.x=( event.clientX / window.innerWidth ) * 2 - 1;
@@ -119,6 +125,7 @@ render(){
   }
 
   ngOnInit() {
+    this.dracoLoad();
     this.orbitControls();
     this.loadTerrain();
     this.render();
